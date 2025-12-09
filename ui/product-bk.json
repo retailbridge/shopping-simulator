@@ -1,0 +1,111 @@
+{
+  "element": {
+    "sourceTag": "container",
+    "type": "custom",
+    "children": [
+      {
+        "sourceTag": "text",
+        "type": "custom",
+        "children": [
+          "Sansevieria Plant"
+        ],
+        "properties": {
+          "id": "productTitle",
+          "style": {
+            "fontSize": "28",
+            "color": "#ffffff",
+            "fontWeight": "600"
+          }
+        },
+        "dataUid": "uid-2"
+      },
+      {
+        "sourceTag": "text",
+        "type": "custom",
+        "children": [
+          "$14.99"
+        ],
+        "properties": {
+          "id": "productPrice",
+          "style": {
+            "fontSize": "22",
+            "color": "#00ffcc",
+            "fontWeight": "600"
+          }
+        },
+        "dataUid": "uid-3"
+      },
+      {
+        "sourceTag": "text",
+        "type": "custom",
+        "children": [
+          "A low-maintenance plant that thrives indoors and looks great on any desk."
+        ],
+        "properties": {
+          "id": "productDescription",
+          "style": {
+            "fontSize": "18",
+            "color": "#dddddd",
+            "lineHeight": "1.4"
+          }
+        },
+        "dataUid": "uid-4"
+      }
+    ],
+    "properties": {
+      "id": "productPanel",
+      "style": {
+        "width": "420",
+        "height": "260",
+        "backgroundcolor": "rgba(15,15,20,0.9)",
+        "padding": "16",
+        "gap": "8",
+        "borderradius": "18"
+      }
+    },
+    "dataUid": "uid-1"
+  },
+  "classes": {},
+  "ranges": {
+    "uid-1": {
+      "start": {
+        "line": 1,
+        "column": 0
+      },
+      "end": {
+        "line": 44,
+        "column": 12
+      }
+    },
+    "uid-2": {
+      "start": {
+        "line": 12,
+        "column": 2
+      },
+      "end": {
+        "line": 21,
+        "column": 9
+      }
+    },
+    "uid-3": {
+      "start": {
+        "line": 23,
+        "column": 2
+      },
+      "end": {
+        "line": 32,
+        "column": 9
+      }
+    },
+    "uid-4": {
+      "start": {
+        "line": 34,
+        "column": 2
+      },
+      "end": {
+        "line": 43,
+        "column": 9
+      }
+    }
+  }
+}

@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>XR Shopping Simulator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #000;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+      }
+
+      /* Main scene container used by IWS / Three.js */
+      #scene-container {
+        width: 100%;
+        height: 100%;
+      }
+
+      /* Fullscreen loading overlay */
+      #loading-overlay {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: radial-gradient(circle at top, #111 0, #000 55%, #000 100%);
+        z-index: 9999;
+        color: #fff;
+        pointer-events: none;
+      }
+
+      #loading-logo {
+        width: min(70vw, 520px);
+        max-width: 520px;
+        margin-bottom: 28px;
+        object-fit: contain;
+      }
+
+      #loading-title {
+        font-size: 1.55rem;
+        font-weight: 650;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 18px;
+        text-align: center;
+        opacity: 0.97;
+      }
+
+      #loading-subtitle {
+        font-size: 0.98rem;
+        opacity: 0.86;
+        margin-bottom: 26px;
+        text-align: center;
+        padding: 0 20px;
+        max-width: 640px;
+      }
+
+      /* Loading bar + message container */
+      #loading-bar-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 14px;
+        margin-top: 6px;
+      }
+
+      /* Smaller screens or typical headset mirroring → stack vertically */
+      @media (max-width: 700px) {
+        #loading-bar-container {
+          flex-direction: column;
+          gap: 8px;
+        }
+      }
+
+      #loading-bar {
+        width: min(70vw, 480px);
+        height: 8px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.08);
+        overflow: hidden;
+        position: relative;
+      }
+
+      #loading-bar-fill {
+        position: absolute;
+        inset: 0;
+        width: 0%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, #34d399, #22c55e, #4ade80);
+        transform-origin: left center;
+      }
+
+      #loading-bar-message {
+        font-size: 0.9rem;
+        opacity: 0.75;
+        white-space: nowrap;
+        animation: fade-in 0.9s ease-out forwards;
+      }
+
+      #loading-hint {
+        margin-top: 16px;
+        font-size: 0.8rem;
+        opacity: 0.7;
+        text-align: center;
+        max-width: 520px;
+        padding: 0 20px;
+      }
+
+      @keyframes fade-in {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 0.75;
+        }
+      }
+
+      /* Fade-out animation when ready */
+      .loading-hidden {
+        opacity: 0;
+        transition: opacity 0.5s ease-out;
+        pointer-events: none;
+      }
+
+      /* Desktop / non-VR description card overlay (optional) */
+      #page-info {
+        position: fixed;
+        left: 16px;
+        bottom: 16px;
+        max-width: 420px;
+        padding: 14px 16px;
+        border-radius: 10px;
+        background: rgba(10, 10, 10, 0.88);
+        color: #f9fafb;
+        z-index: 20;
+        box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        pointer-events: auto;
+      }
+
+      #page-info h1 {
+        font-size: 1.05rem;
+        margin: 0 0 6px 0;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: #bbf7d0;
+      }
+
+      #page-info p {
+        margin: 0 0 8px 0;
+        font-size: 0.88rem;
+        line-height: 1.4;
+        color: #e5e7eb;
+      }
+
+      #page-info strong {
+        font-weight: 600;
+      }
+
+      #page-info small {
+        font-size: 0.78rem;
+        opacity: 0.85;
+      }
+
+      @media (max-width: 640px) {
+        #page-info {
+          max-width: calc(100% - 32px);
+        }
+      }
+    </style>
+    <script type="module" crossorigin src="/shopping-simulator/assets/index-DPmuP-oy.js"></script>
+  </head>
+
+  <body>
+    <!-- Fullscreen loading screen (visible immediately) -->
+    <div id="loading-overlay">
+      <!-- Using the same texture as the in-world banner for now -->
+      <img
+        id="loading-logo"
+        src="./textures/webxr.png"
+        alt="XR Shopping Simulator Logo"
+      />
+      <div id="loading-title">XR Shopping Simulator</div>
+      <div id="loading-subtitle">
+        Step behind the checkout counter, grab 3D products with your hands,
+        scan them on the glowing pad, and see how many items you can race through
+        before the clock runs out.
+      </div>
+
+      <div id="loading-bar-container">
+        <div id="loading-bar">
+          <div id="loading-bar-fill"></div>
+        </div>
+
+        <div id="loading-bar-message">
+          Loading game…
+        </div>
+      </div>
+
+      <div id="loading-hint">
+        Best played on <strong>Meta Quest</strong> devices with hand tracking
+        enabled. For best results, use a WebXR-enabled browser (for example,
+        a Chromium-based browser with WebXR support), then click
+        <strong>"Enter XR"</strong> or <strong>"Enter VR"</strong> to jump
+        into the headset once the page is ready.
+      </div>
+    </div>
+
+    <!-- Small on-page description card (desktop / non-VR) -->
+    <div id="page-info">
+      <h1>XR Shopping Simulator</h1>
+      <p>
+        A fast, light-hearted lifestyle XR game where you learn how to shop in immersive 3D a checkout counter,
+        grab items, and scan them as quickly as you can before the clock hits zero.
+      </p>
+      <p>
+        Inspired by the spirit of <strong>Job Simulator</strong>, this experience
+        focuses on hand-tracked grabbing, clean spatial UI, and a simple,
+        core game loop to extend the game fun.
+      </p>
+      <small>
+        Tip: Once the page has loaded, press
+        <strong>"Enter XR"</strong> or <strong>"Start VR"</strong> in your browser.
+        Best played on <strong>Meta Quest</strong> headsets.
+      </small>
+    </div>
+
+    <!-- IWS / Three.js scene -->
+    <div id="scene-container"></div>
+
+    <!-- Hook script: adjust src to whatever your bundler outputs if needed -->
+
+    <script>
+      (function () {
+        const overlay = document.getElementById("loading-overlay");
+        const barFill = document.getElementById("loading-bar-fill");
+        const barMessage = document.getElementById("loading-bar-message");
+
+        let progress = 0;
+        let worldReady = false;
+        let intervalId = null;
+
+        function setProgress(p) {
+          progress = Math.max(0, Math.min(100, p));
+          if (barFill) {
+            barFill.style.width = progress + "%";
+          }
+
+          if (!barMessage) return;
+
+          if (progress < 30) {
+            barMessage.textContent = "Loading game… stocking the shelves";
+          } else if (progress < 70) {
+            barMessage.textContent = "Loading game… lining up the customers";
+          } else if (progress < 100) {
+            barMessage.textContent = "Almost ready… tuning the scanner beeps";
+          } else {
+            barMessage.textContent = "Game loaded. Get ready!";
+          }
+        }
+
+        function fadeOutOverlay() {
+          if (!overlay) return;
+          overlay.classList.add("loading-hidden");
+          setTimeout(() => {
+            if (overlay && overlay.parentNode) {
+              overlay.parentNode.removeChild(overlay);
+            }
+          }, 600);
+        }
+
+        function startFakeLoading() {
+          if (intervalId) return;
+
+          setProgress(5);
+
+          // Tick every 100ms → ~5 seconds to reach ~95%
+          intervalId = setInterval(() => {
+            if (worldReady) {
+              // Accelerate to 100% when the real world is ready
+              if (progress < 100) {
+                setProgress(progress + 10);
+              } else {
+                clearInterval(intervalId);
+                intervalId = null;
+                fadeOutOverlay();
+              }
+              return;
+            }
+
+            if (progress < 95) {
+              setProgress(progress + 2);
+            } else {
+              setProgress(95);
+            }
+          }, 100);
+
+          // Safety timeout: if world-ready never fires, force-complete after 10s.
+          setTimeout(() => {
+            if (!worldReady) {
+              worldReady = true;
+              setProgress(100);
+              if (intervalId) {
+                clearInterval(intervalId);
+                intervalId = null;
+              }
+              fadeOutOverlay();
+            }
+          }, 10000);
+        }
+
+        // Start fake loading immediately
+        startFakeLoading();
+
+        // When the world is created in index.ts, it should dispatch "world-ready".
+        // We listen here and let the progress bar finish quickly.
+        window.addEventListener("world-ready", () => {
+          worldReady = true;
+          // If fake loading already got close, this will just top it off.
+          if (!intervalId) {
+            setProgress(100);
+            fadeOutOverlay();
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,211 @@
+{
+  "element": {
+    "sourceTag": "ui",
+    "type": "custom",
+    "children": [
+      {
+        "sourceTag": "panel",
+        "type": "custom",
+        "children": [
+          {
+            "sourceTag": "column",
+            "type": "custom",
+            "children": [
+              {
+                "sourceTag": "text",
+                "type": "custom",
+                "children": [
+                  {
+                    "sourceTag": "text",
+                    "type": "custom",
+                    "children": [
+                      {
+                        "sourceTag": "text",
+                        "type": "custom",
+                        "children": [
+                          {
+                            "sourceTag": "text",
+                            "type": "custom",
+                            "children": [
+                              {
+                                "sourceTag": "button",
+                                "type": "custom",
+                                "children": [
+                                  {
+                                    "sourceTag": "text",
+                                    "type": "custom",
+                                    "children": [],
+                                    "properties": {
+                                      "value": "Grab an item to start!",
+                                      "fontsize": "30",
+                                      "fontweight": "700",
+                                      "color": "#FFFFFF",
+                                      "textalign": "center"
+                                    },
+                                    "dataUid": "uid-9"
+                                  }
+                                ],
+                                "properties": {
+                                  "id": "startHint",
+                                  "background": "#4CAF50",
+                                  "padding": "18",
+                                  "cornerradius": "14"
+                                },
+                                "dataUid": "uid-8"
+                              }
+                            ],
+                            "properties": {
+                              "value": "Tip: Watch the timer and 'Scanned' counter floating above the scanner.",
+                              "fontsize": "24",
+                              "fontweight": "500",
+                              "color": "#8BE9FF",
+                              "textalign": "center"
+                            },
+                            "dataUid": "uid-7"
+                          }
+                        ],
+                        "properties": {
+                          "value": "• Grab an item from the desk with your hands.\\n• Move it over the glowing scanner pad.\\n• Each beep adds +1 to your score.\\n• You have 60 seconds – scan as many items as you can.",
+                          "fontsize": "26",
+                          "fontweight": "500",
+                          "color": "#E0E0E0",
+                          "textalign": "left",
+                          "lineheight": "1.3"
+                        },
+                        "dataUid": "uid-6"
+                      }
+                    ],
+                    "properties": {
+                      "value": "How to play:",
+                      "fontsize": "32",
+                      "fontweight": "600",
+                      "color": "#FFFFFF",
+                      "textalign": "left"
+                    },
+                    "dataUid": "uid-5"
+                  }
+                ],
+                "properties": {
+                  "value": "Welcome to XR Checkout",
+                  "fontsize": "44",
+                  "fontweight": "700",
+                  "color": "#FFFFFF",
+                  "textalign": "center"
+                },
+                "dataUid": "uid-4"
+              }
+            ],
+            "properties": {
+              "spacing": "18",
+              "alignitems": "stretch"
+            },
+            "dataUid": "uid-3"
+          }
+        ],
+        "properties": {
+          "background": "rgba(15,15,30,0.9)",
+          "padding": "24",
+          "cornerradius": "18"
+        },
+        "dataUid": "uid-2"
+      }
+    ],
+    "properties": {
+      "version": "1.0"
+    },
+    "dataUid": "uid-1"
+  },
+  "classes": {},
+  "ranges": {
+    "uid-1": {
+      "start": {
+        "line": 0,
+        "column": 0
+      },
+      "end": {
+        "line": 50,
+        "column": 5
+      }
+    },
+    "uid-2": {
+      "start": {
+        "line": 1,
+        "column": 2
+      },
+      "end": {
+        "line": 49,
+        "column": 10
+      }
+    },
+    "uid-3": {
+      "start": {
+        "line": 2,
+        "column": 4
+      },
+      "end": {
+        "line": 48,
+        "column": 13
+      }
+    },
+    "uid-4": {
+      "start": {
+        "line": 4,
+        "column": 6
+      },
+      "end": {
+        "line": 48,
+        "column": 4
+      }
+    },
+    "uid-5": {
+      "start": {
+        "line": 11,
+        "column": 6
+      },
+      "end": {
+        "line": 48,
+        "column": 4
+      }
+    },
+    "uid-6": {
+      "start": {
+        "line": 18,
+        "column": 6
+      },
+      "end": {
+        "line": 48,
+        "column": 4
+      }
+    },
+    "uid-7": {
+      "start": {
+        "line": 26,
+        "column": 6
+      },
+      "end": {
+        "line": 48,
+        "column": 4
+      }
+    },
+    "uid-8": {
+      "start": {
+        "line": 33,
+        "column": 6
+      },
+      "end": {
+        "line": 46,
+        "column": 15
+      }
+    },
+    "uid-9": {
+      "start": {
+        "line": 39,
+        "column": 8
+      },
+      "end": {
+        "line": 46,
+        "column": 6
+      }
+    }
+  }
+}

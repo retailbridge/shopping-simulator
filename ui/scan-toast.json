@@ -1,0 +1,60 @@
+{
+  "element": {
+    "sourceTag": "container",
+    "type": "custom",
+    "children": [
+      {
+        "sourceTag": "text",
+        "type": "custom",
+        "children": [
+          "Scanned - Good job!"
+        ],
+        "properties": {
+          "id": "scanToastText",
+          "style": {
+            "fontSize": "20",
+            "color": "#ffffff",
+            "fontWeight": "600"
+          }
+        },
+        "dataUid": "uid-2"
+      }
+    ],
+    "properties": {
+      "id": "scanToast",
+      "style": {
+        "width": "260",
+        "height": "48",
+        "padding": "10",
+        "borderRadius": 999,
+        "backgroundColor": "rgba(0, 140, 0, 0.92)",
+        "alignItems": "center",
+        "justifyContent": "center"
+      }
+    },
+    "dataUid": "uid-1"
+  },
+  "classes": {},
+  "ranges": {
+    "uid-1": {
+      "start": {
+        "line": 1,
+        "column": 0
+      },
+      "end": {
+        "line": 23,
+        "column": 12
+      }
+    },
+    "uid-2": {
+      "start": {
+        "line": 13,
+        "column": 2
+      },
+      "end": {
+        "line": 22,
+        "column": 9
+      }
+    }
+  }
+}

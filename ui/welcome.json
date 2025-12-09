@@ -1,0 +1,211 @@
+{
+  "element": {
+    "type": "container",
+    "sourceTag": "div",
+    "children": [
+      {
+        "sourceTag": "span",
+        "type": "custom",
+        "children": [
+          "XR Shopping Simulator"
+        ],
+        "properties": {
+          "class": "heading"
+        },
+        "dataUid": "uid-2"
+      },
+      {
+        "sourceTag": "span",
+        "type": "custom",
+        "children": [
+          "Grab an item with your contoller or hand and move it over the green pad to scan it. Level 1 - Beat the shopping clock, and score more than $150 to win!"
+        ],
+        "properties": {
+          "class": "sub-heading"
+        },
+        "dataUid": "uid-3"
+      },
+      {
+        "sourceTag": "button",
+        "type": "custom",
+        "children": [
+          "Start in XR"
+        ],
+        "properties": {
+          "id": "xr-button"
+        },
+        "dataUid": "uid-4"
+      }
+    ],
+    "properties": {
+      "class": "panel-container"
+    },
+    "dataUid": "uid-1"
+  },
+  "classes": {
+    "panel-container": {
+      "content": {
+        "alignItems": "flex-start",
+        "padding": "2.4",
+        "width": "60",
+        "display": "flex",
+        "flexDirection": "column",
+        "backgroundColor": "rgba(24, 119, 242, 0.90)",
+        "borderColor": "#1A8CFF",
+        "borderWidth": "0.20",
+        "borderRadius": 3.6,
+        "gap": "2.6"
+      }
+    },
+    "heading": {
+      "content": {
+        "fontSize": "4.8",
+        "fontWeight": "700",
+        "color": "#ffffff",
+        "textAlign": "left"
+      }
+    },
+    "sub-heading": {
+      "content": {
+        "fontSize": "2.4",
+        "color": "#EAF4FF",
+        "textAlign": "left",
+        "marginTop": "0.4",
+        "lineHeight": "1.5"
+      }
+    },
+    "instructions-title": {
+      "content": {
+        "fontSize": "2.5",
+        "fontWeight": "600",
+        "color": "#FFFFFF",
+        "marginTop": "1.4"
+      }
+    },
+    "instructions-text": {
+      "content": {
+        "fontSize": "2.2",
+        "color": "#F0F8FF",
+        "lineHeight": "1.6"
+      }
+    },
+    "__id__xr-button": {
+      "content": {
+        "width": "100%",
+        "padding": "2",
+        "backgroundColor": "#1A8CFF",
+        "color": "#ffffff",
+        "borderRadius": 1.6,
+        "borderWidth": "0.1",
+        "borderColor": "#3B9CFF",
+        "fontSize": "2.7",
+        "fontWeight": "650",
+        "textAlign": "center",
+        "cursor": "pointer",
+        "marginTop": "1.8"
+      }
+    }
+  },
+  "ranges": {
+    "panel-container": {
+      "start": {
+        "line": 1,
+        "column": 2
+      },
+      "end": {
+        "line": 1,
+        "column": 18
+      }
+    },
+    "heading": {
+      "start": {
+        "line": 17,
+        "column": 2
+      },
+      "end": {
+        "line": 17,
+        "column": 10
+      }
+    },
+    "sub-heading": {
+      "start": {
+        "line": 24,
+        "column": 2
+      },
+      "end": {
+        "line": 24,
+        "column": 14
+      }
+    },
+    "instructions-title": {
+      "start": {
+        "line": 32,
+        "column": 2
+      },
+      "end": {
+        "line": 32,
+        "column": 21
+      }
+    },
+    "instructions-text": {
+      "start": {
+        "line": 39,
+        "column": 2
+      },
+      "end": {
+        "line": 39,
+        "column": 20
+      }
+    },
+    "__id__xr-button": {
+      "start": {
+        "line": 45,
+        "column": 2
+      },
+      "end": {
+        "line": 45,
+        "column": 12
+      }
+    },
+    "uid-1": {
+      "start": {
+        "line": 65,
+        "column": 0
+      },
+      "end": {
+        "line": 73,
+        "column": 6
+      }
+    },
+    "uid-2": {
+      "start": {
+        "line": 66,
+        "column": 2
+      },
+      "end": {
+        "line": 66,
+        "column": 52
+      }
+    },
+    "uid-3": {
+      "start": {
+        "line": 68,
+        "column": 2
+      },
+      "end": {
+        "line": 70,
+        "column": 9
+      }
+    },
+    "uid-4": {
+      "start": {
+        "line": 72,
+        "column": 2
+      },
+      "end": {
+        "line": 72,
+        "column": 45
+      }
+    }
+  }
+}

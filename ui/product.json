@@ -1,0 +1,146 @@
+{
+  "element": {
+    "sourceTag": "ui",
+    "type": "custom",
+    "children": [
+      {
+        "sourceTag": "panel",
+        "type": "custom",
+        "children": [
+          {
+            "sourceTag": "column",
+            "type": "custom",
+            "children": [
+              {
+                "sourceTag": "text",
+                "type": "custom",
+                "children": [
+                  {
+                    "sourceTag": "text",
+                    "type": "custom",
+                    "children": [
+                      {
+                        "sourceTag": "text",
+                        "type": "custom",
+                        "children": [],
+                        "properties": {
+                          "id": "productDescription",
+                          "value": "Scan an item to view details.",
+                          "fontsize": "26",
+                          "fontweight": "400",
+                          "color": "#DDDDDD",
+                          "textalign": "center",
+                          "lineheight": "1.3"
+                        },
+                        "dataUid": "uid-6"
+                      }
+                    ],
+                    "properties": {
+                      "id": "productPrice",
+                      "value": "$0.00",
+                      "fontsize": "34",
+                      "fontweight": "600",
+                      "color": "#00FFCC",
+                      "textalign": "center",
+                      "lineheight": "1.2"
+                    },
+                    "dataUid": "uid-5"
+                  }
+                ],
+                "properties": {
+                  "id": "productTitle",
+                  "value": "Product Name",
+                  "fontsize": "42",
+                  "fontweight": "700",
+                  "color": "#FFFFFF",
+                  "textalign": "center",
+                  "lineheight": "1.2"
+                },
+                "dataUid": "uid-4"
+              }
+            ],
+            "properties": {
+              "spacing": "22",
+              "alignitems": "center"
+            },
+            "dataUid": "uid-3"
+          }
+        ],
+        "properties": {
+          "id": "productPanel",
+          "background": "rgba(15, 15, 20, 0.90)",
+          "padding": "28",
+          "cornerradius": "22"
+        },
+        "dataUid": "uid-2"
+      }
+    ],
+    "properties": {
+      "version": "1.0"
+    },
+    "dataUid": "uid-1"
+  },
+  "classes": {},
+  "ranges": {
+    "uid-1": {
+      "start": {
+        "line": 1,
+        "column": 0
+      },
+      "end": {
+        "line": 47,
+        "column": 5
+      }
+    },
+    "uid-2": {
+      "start": {
+        "line": 3,
+        "column": 2
+      },
+      "end": {
+        "line": 45,
+        "column": 10
+      }
+    },
+    "uid-3": {
+      "start": {
+        "line": 9,
+        "column": 4
+      },
+      "end": {
+        "line": 44,
+        "column": 13
+      }
+    },
+    "uid-4": {
+      "start": {
+        "line": 12,
+        "column": 6
+      },
+      "end": {
+        "line": 44,
+        "column": 4
+      }
+    },
+    "uid-5": {
+      "start": {
+        "line": 23,
+        "column": 6
+      },
+      "end": {
+        "line": 44,
+        "column": 4
+      }
+    },
+    "uid-6": {
+      "start": {
+        "line": 34,
+        "column": 6
+      },
+      "end": {
+        "line": 44,
+        "column": 4
+      }
+    }
+  }
+}

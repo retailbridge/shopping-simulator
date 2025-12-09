@@ -1,0 +1,245 @@
+{
+  "element": {
+    "type": "container",
+    "sourceTag": "div",
+    "children": [
+      {
+        "sourceTag": "span",
+        "type": "custom",
+        "children": [
+          "Welcome to Shopping Simulator"
+        ],
+        "properties": {
+          "class": "heading"
+        },
+        "dataUid": "uid-2"
+      },
+      {
+        "sourceTag": "span",
+        "type": "custom",
+        "children": [
+          "aaGrab an item, scan it, and watch the magic happen. Your mission: explore,\n    scan, organize, and enjoy your own mixed-reality mini-market. Hands ready—\n    let’s begin!"
+        ],
+        "properties": {
+          "class": "sub-heading"
+        },
+        "dataUid": "uid-3"
+      },
+      {
+        "sourceTag": "button",
+        "type": "custom",
+        "children": [
+          "Version"
+        ],
+        "properties": {
+          "class": "menu-button",
+          "id": "version-button"
+        },
+        "dataUid": "uid-4"
+      },
+      {
+        "sourceTag": "button",
+        "type": "custom",
+        "children": [
+          "About"
+        ],
+        "properties": {
+          "class": "menu-button",
+          "id": "about-button"
+        },
+        "dataUid": "uid-5"
+      },
+      {
+        "sourceTag": "button",
+        "type": "custom",
+        "children": [
+          "Enter XR"
+        ],
+        "properties": {
+          "id": "xr-button"
+        },
+        "dataUid": "uid-6"
+      }
+    ],
+    "properties": {
+      "class": "panel-container"
+    },
+    "dataUid": "uid-1"
+  },
+  "classes": {
+    "panel-container": {
+      "content": {
+        "alignItems": "flex-start",
+        "padding": "2",
+        "width": "60",
+        "display": "flex",
+        "flexDirection": "column",
+        "backgroundColor": "#0d0d10",
+        "borderColor": "#2e2e33",
+        "borderWidth": "0.18",
+        "borderRadius": 3,
+        "gap": "2"
+      }
+    },
+    "heading": {
+      "content": {
+        "fontSize": "4.5",
+        "fontWeight": "600",
+        "color": "#ffffff",
+        "textAlign": "left"
+      }
+    },
+    "sub-heading": {
+      "content": {
+        "fontSize": "2.2",
+        "color": "#c7c7d1",
+        "textAlign": "left",
+        "marginTop": "0.3",
+        "lineHeight": "1.4"
+      }
+    },
+    "menu-button": {
+      "content": {
+        "width": "100%",
+        "padding": "1.8",
+        "backgroundColor": "#1a1a1e",
+        "color": "#fafafa",
+        "borderRadius": 1.5,
+        "borderWidth": "0.15",
+        "borderColor": "#3a3a40",
+        "fontSize": "2.3",
+        "fontWeight": "500",
+        "textAlign": "center",
+        "cursor": "pointer"
+      }
+    },
+    "__id__xr-button": {
+      "content": {
+        "width": "100%",
+        "padding": "1.8",
+        "backgroundColor": "#fafafa",
+        "color": "#09090b",
+        "borderRadius": 1.5,
+        "borderWidth": "0.1",
+        "borderColor": "#e4e4e7",
+        "fontSize": "2.5",
+        "fontWeight": "600",
+        "textAlign": "center",
+        "cursor": "pointer",
+        "marginTop": "1"
+      }
+    }
+  },
+  "ranges": {
+    "panel-container": {
+      "start": {
+        "line": 1,
+        "column": 2
+      },
+      "end": {
+        "line": 1,
+        "column": 18
+      }
+    },
+    "heading": {
+      "start": {
+        "line": 14,
+        "column": 2
+      },
+      "end": {
+        "line": 14,
+        "column": 10
+      }
+    },
+    "sub-heading": {
+      "start": {
+        "line": 21,
+        "column": 2
+      },
+      "end": {
+        "line": 21,
+        "column": 14
+      }
+    },
+    "menu-button": {
+      "start": {
+        "line": 29,
+        "column": 2
+      },
+      "end": {
+        "line": 29,
+        "column": 14
+      }
+    },
+    "__id__xr-button": {
+      "start": {
+        "line": 43,
+        "column": 2
+      },
+      "end": {
+        "line": 43,
+        "column": 12
+      }
+    },
+    "uid-1": {
+      "start": {
+        "line": 59,
+        "column": 0
+      },
+      "end": {
+        "line": 72,
+        "column": 6
+      }
+    },
+    "uid-2": {
+      "start": {
+        "line": 60,
+        "column": 2
+      },
+      "end": {
+        "line": 60,
+        "column": 60
+      }
+    },
+    "uid-3": {
+      "start": {
+        "line": 62,
+        "column": 2
+      },
+      "end": {
+        "line": 66,
+        "column": 9
+      }
+    },
+    "uid-4": {
+      "start": {
+        "line": 68,
+        "column": 2
+      },
+      "end": {
+        "line": 68,
+        "column": 66
+      }
+    },
+    "uid-5": {
+      "start": {
+        "line": 69,
+        "column": 2
+      },
+      "end": {
+        "line": 69,
+        "column": 62
+      }
+    },
+    "uid-6": {
+      "start": {
+        "line": 71,
+        "column": 2
+      },
+      "end": {
+        "line": 71,
+        "column": 42
+      }
+    }
+  }
+}

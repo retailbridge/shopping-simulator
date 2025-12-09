@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:document xmlns:ui="http://www.meta.com/uikit">
+  <ui:screen>
+    <ui:stack
+      id="roundRoot"
+      direction="column"
+      alignment="center"
+      spacing="12"
+      padding="16"
+      width="auto"
+      height="auto"
+    >
+      <ui:text
+        id="roundTitle"
+        value="Time's Up!"
+        fontSize="26"
+        weight="bold"
+        color="#FFFFFF"
+      />
+      <ui:text
+        id="roundScore"
+        value="You scanned 0 items"
+        fontSize="22"
+        color="#FFFFFF"
+      />
+      <ui:text
+        id="roundMessage"
+        value="Nice work at the XR checkout."
+        fontSize="18"
+        color="#CCCCCC"
+      />
+      <ui:button
+        id="playAgainButton"
+        label="Play Again"
+        width="180"
+        height="44"
+      />
+    </ui:stack>
+  </ui:screen>
+</ui:document>

@@ -1,0 +1,161 @@
+{
+  "element": {
+    "sourceTag": "ui:document",
+    "type": "custom",
+    "children": [
+      {
+        "sourceTag": "ui:screen",
+        "type": "custom",
+        "children": [
+          {
+            "sourceTag": "ui:stack",
+            "type": "custom",
+            "children": [
+              {
+                "sourceTag": "ui:text",
+                "type": "custom",
+                "children": [
+                  {
+                    "sourceTag": "ui:text",
+                    "type": "custom",
+                    "children": [
+                      {
+                        "sourceTag": "ui:text",
+                        "type": "custom",
+                        "children": [
+                          {
+                            "sourceTag": "ui:button",
+                            "type": "custom",
+                            "children": [],
+                            "properties": {
+                              "id": "playAgainButton",
+                              "label": "Play Again",
+                              "width": "180",
+                              "height": "44"
+                            },
+                            "dataUid": "uid-7"
+                          }
+                        ],
+                        "properties": {
+                          "id": "roundMessage",
+                          "value": "Nice work at the XR checkout.",
+                          "fontsize": "18",
+                          "color": "#CCCCCC"
+                        },
+                        "dataUid": "uid-6"
+                      }
+                    ],
+                    "properties": {
+                      "id": "roundScore",
+                      "value": "You scanned 0 items",
+                      "fontsize": "22",
+                      "color": "#FFFFFF"
+                    },
+                    "dataUid": "uid-5"
+                  }
+                ],
+                "properties": {
+                  "id": "roundTitle",
+                  "value": "Time's Up!",
+                  "fontsize": "26",
+                  "weight": "bold",
+                  "color": "#FFFFFF"
+                },
+                "dataUid": "uid-4"
+              }
+            ],
+            "properties": {
+              "id": "roundRoot",
+              "direction": "column",
+              "alignment": "center",
+              "spacing": "12",
+              "padding": "16",
+              "width": "auto",
+              "height": "auto"
+            },
+            "dataUid": "uid-3"
+          }
+        ],
+        "properties": {},
+        "dataUid": "uid-2"
+      }
+    ],
+    "properties": {
+      "xmlns:ui": "http://www.meta.com/uikit"
+    },
+    "dataUid": "uid-1"
+  },
+  "classes": {},
+  "ranges": {
+    "uid-1": {
+      "start": {
+        "line": 1,
+        "column": 0
+      },
+      "end": {
+        "line": 39,
+        "column": 14
+      }
+    },
+    "uid-2": {
+      "start": {
+        "line": 2,
+        "column": 2
+      },
+      "end": {
+        "line": 38,
+        "column": 14
+      }
+    },
+    "uid-3": {
+      "start": {
+        "line": 3,
+        "column": 4
+      },
+      "end": {
+        "line": 37,
+        "column": 15
+      }
+    },
+    "uid-4": {
+      "start": {
+        "line": 12,
+        "column": 6
+      },
+      "end": {
+        "line": 37,
+        "column": 4
+      }
+    },
+    "uid-5": {
+      "start": {
+        "line": 19,
+        "column": 6
+      },
+      "end": {
+        "line": 37,
+        "column": 4
+      }
+    },
+    "uid-6": {
+      "start": {
+        "line": 25,
+        "column": 6
+      },
+      "end": {
+        "line": 37,
+        "column": 4
+      }
+    },
+    "uid-7": {
+      "start": {
+        "line": 31,
+        "column": 6
+      },
+      "end": {
+        "line": 37,
+        "column": 4
+      }
+    }
+  }
+}
