@@ -1,0 +1,48 @@
+<!-- ui/product.uikitml -->
+<ui version="1.0">
+
+  <panel
+    id="productPanel"
+    background="rgba(15, 15, 20, 0.90)"
+    padding="28"
+    cornerRadius="22"
+  >
+    <column spacing="22" alignItems="center">
+
+      <!-- Product Title -->
+      <text
+        id="productTitle"
+        value="Product Name"
+        fontSize="42"
+        fontWeight="700"
+        color="#FFFFFF"
+        textAlign="center"
+        lineHeight="1.2"
+      />
+
+      <!-- Product Price -->
+      <text
+        id="productPrice"
+        value="$0.00"
+        fontSize="34"
+        fontWeight="600"
+        color="#00FFCC"
+        textAlign="center"
+        lineHeight="1.2"
+      />
+
+      <!-- Product Description -->
+      <text
+        id="productDescription"
+        value="Scan an item to view details."
+        fontSize="26"
+        fontWeight="400"
+        color="#DDDDDD"
+        textAlign="center"
+        lineHeight="1.3"
+      />
+
+    </column>
+  </panel>
+
+</ui>

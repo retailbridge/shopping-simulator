@@ -1,0 +1,12 @@
+{
+  "type": "panel",
+  "children": [
+    {
+      "type": "text",
+      "props": {
+        "value": "Scanned - Good Job!",
+        "fontSize": 16
+      }
+    }
+  ]
+}

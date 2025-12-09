@@ -1,0 +1,46 @@
+{
+  "type": "panel",
+  "background": "rgba(20,20,20,0.85)",
+  "padding": 32,
+  "cornerRadius": 22,
+  "content": {
+    "type": "column",
+    "spacing": 24,
+    "alignItems": "center",
+    "children": [
+      {
+        "type": "text",
+        "id": "onboardingTitle",
+        "value": "Welcome to XR Shopping Simulator",
+        "fontSize": 48,
+        "fontWeight": "700",
+        "color": "#FFFFFF",
+        "textAlign": "center"
+      },
+      {
+        "type": "text",
+        "id": "onboardingSubtitle",
+        "value": "Pick up an item and place it over the scanner\nto begin your first round.",
+        "fontSize": 32,
+        "fontWeight": "500",
+        "color": "#DDDDDD",
+        "textAlign": "center"
+      },
+      {
+        "type": "button",
+        "id": "startRoundBtn",
+        "background": "#4CAF50",
+        "padding": 24,
+        "cornerRadius": 16,
+        "content": {
+          "type": "text",
+          "value": "Start Game",
+          "fontSize": 36,
+          "fontWeight": "700",
+          "color": "#FFFFFF",
+          "textAlign": "center"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,779 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>XR Shopping Simulator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="module" src="/src/index.ts"></script>
+
+    <style>
+      :root {
+        color-scheme: dark;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        background: radial-gradient(circle at top, #050816 0%, #020308 45%, #000 100%);
+        color: #ffffff;
+      }
+
+      body {
+        display: flex;
+        align-items: stretch;
+        justify-content: stretch;
+      }
+
+      #app-root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+
+      /* ===== SPLASH SCREEN ===== */
+      #splash-screen {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        background: radial-gradient(circle at top, #050816 0%, #020308 45%, #000 100%);
+        z-index: 10;
+        opacity: 1;
+        pointer-events: auto;
+        transition: opacity 0.6s ease-out;
+      }
+
+      #splash-screen.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .splash-inner {
+        width: 100%;
+        max-width: 960px;
+        max-height: 640px;
+        display: flex;
+        flex-direction: column;
+        border-radius: 32px;
+        padding: 28px 28px 24px;
+        position: relative;
+        overflow: hidden;
+        background: radial-gradient(circle at top, rgba(90, 182, 255, 0.16), transparent 60%),
+          radial-gradient(circle at bottom, rgba(0, 255, 170, 0.12), transparent 55%),
+          linear-gradient(135deg, rgba(4, 9, 30, 0.98), rgba(2, 4, 18, 0.98));
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow:
+          0 22px 40px rgba(0, 0, 0, 0.6),
+          0 0 80px rgba(0, 255, 170, 0.25);
+        backdrop-filter: blur(22px);
+      }
+
+      .orb {
+        position: absolute;
+        border-radius: 999px;
+        filter: blur(42px);
+        pointer-events: none;
+        opacity: 0.55;
+      }
+
+      .orb-top-left {
+        width: 280px;
+        height: 280px;
+        top: -80px;
+        left: -40px;
+        background: radial-gradient(circle, rgba(87, 190, 255, 0.85), transparent 60%);
+      }
+
+      .orb-bottom-right {
+        width: 320px;
+        height: 320px;
+        bottom: -100px;
+        right: -60px;
+        background: radial-gradient(circle, rgba(0, 255, 170, 0.85), transparent 65%);
+      }
+
+      .splash-main {
+        display: flex;
+        flex: 1;
+        gap: 24px;
+        position: relative;
+        z-index: 1;
+        flex-direction: row;
+      }
+
+      .splash-left,
+      .splash-right {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      /* LOGO / LEFT SIDE */
+      .logo-wrap {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        align-items: flex-start;
+        justify-content: center;
+      }
+
+      .logo-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 6px 12px;
+        border-radius: 999px;
+        background: linear-gradient(
+          90deg,
+          rgba(0, 255, 170, 0.18),
+          rgba(0, 188, 255, 0.18)
+        );
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        backdrop-filter: blur(12px);
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #b6ffea;
+      }
+
+      .logo-pill-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 999px;
+        background: #00ffb7;
+        box-shadow: 0 0 18px rgba(0, 255, 183, 0.9);
+      }
+
+      .logo-main {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 18px 22px;
+        border-radius: 24px;
+        background: radial-gradient(circle at top, rgba(255, 255, 255, 0.08), transparent 70%);
+        overflow: visible;
+      }
+
+      .logo-glow-ring {
+        position: absolute;
+        inset: -16px;
+        border-radius: 32px;
+        border: 1px solid rgba(0, 255, 170, 0.55);
+        box-shadow:
+          0 0 18px rgba(0, 255, 170, 0.45),
+          0 0 42px rgba(0, 255, 170, 0.35);
+        opacity: 0.55;
+        pointer-events: none;
+        animation: logoGlowPulse 2.6s ease-in-out infinite;
+      }
+
+      .logo-image {
+        width: 520px;
+        max-width: 100%;
+        height: auto;
+        object-fit: contain;
+        filter: drop-shadow(0 10px 38px rgba(0, 0, 0, 0.85));
+        transform-origin: center;
+        animation: logoFloat 5.5s ease-in-out infinite;
+      }
+
+      @keyframes logoGlowPulse {
+        0% {
+          opacity: 0.5;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.95;
+          transform: scale(1.03);
+        }
+        100% {
+          opacity: 0.5;
+          transform: scale(1);
+        }
+      }
+
+      @keyframes logoFloat {
+        0% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-6px);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
+
+      .tagline {
+        font-size: 16px;
+        color: #c5e9ff;
+        max-width: 360px;
+        line-height: 1.6;
+      }
+
+      /* RIGHT SIDE */
+      .headline {
+        font-size: clamp(26px, 2.4vw, 32px);
+        font-weight: 650;
+        letter-spacing: 0.03em;
+        margin-bottom: 8px;
+      }
+
+      .headline span {
+        color: #6ef9d9;
+      }
+
+      .subhead {
+        font-size: 14px;
+        color: #c7d4ff;
+        max-width: 440px;
+        line-height: 1.7;
+        margin-bottom: 18px;
+      }
+
+      .bullet-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 22px;
+      }
+
+      .bullet-item {
+        display: flex;
+        gap: 8px;
+        font-size: 13px;
+        color: #dde7ff;
+        align-items: flex-start;
+      }
+
+      .bullet-dot {
+        margin-top: 4px;
+        width: 6px;
+        height: 6px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, #00ffb7, #00b4ff);
+        box-shadow: 0 0 14px rgba(0, 255, 183, 0.9);
+      }
+
+      .splash-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 14px;
+      }
+
+      .primary-btn {
+        appearance: none;
+        border: none;
+        border-radius: 999px;
+        padding: 10px 20px;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: linear-gradient(135deg, #00ffb7, #00b4ff);
+        color: #02040f;
+        cursor: pointer;
+        box-shadow:
+          0 8px 20px rgba(0, 0, 0, 0.85),
+          0 0 24px rgba(0, 255, 183, 0.55);
+        transform: translateY(0);
+        transition:
+          transform 0.16s ease-out,
+          box-shadow 0.16s ease-out,
+          filter 0.16s ease-out;
+      }
+
+      .primary-btn:hover {
+        transform: translateY(-1px);
+        filter: brightness(1.06);
+        box-shadow:
+          0 10px 28px rgba(0, 0, 0, 0.95),
+          0 0 30px rgba(0, 255, 183, 0.7);
+      }
+
+      .primary-btn:active {
+        transform: translateY(1px) scale(0.99);
+        box-shadow:
+          0 5px 14px rgba(0, 0, 0, 0.85),
+          0 0 16px rgba(0, 255, 183, 0.4);
+      }
+
+      .primary-btn-icon {
+        width: 16px;
+        height: 16px;
+        border-radius: 4px;
+        background: #02040f;
+        position: relative;
+      }
+
+      .primary-btn-icon::before,
+      .primary-btn-icon::after {
+        content: "";
+        position: absolute;
+        inset: 3px;
+        border-radius: 3px;
+        border: 2px solid #00ffb7;
+      }
+
+      .primary-btn-icon::after {
+        inset: 5px;
+        border-color: #00b4ff;
+        opacity: 0.7;
+      }
+
+      .ghost-btn {
+        appearance: none;
+        border-radius: 999px;
+        padding: 9px 16px;
+        font-size: 13px;
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: transparent;
+        color: #c8d7ff;
+        cursor: pointer;
+        border: 1px solid rgba(200, 215, 255, 0.3);
+        backdrop-filter: blur(10px);
+        transition:
+          background 0.16s ease-out,
+          border-color 0.16s ease-out,
+          color 0.16s ease-out;
+      }
+
+      .ghost-btn:hover {
+        background: rgba(18, 26, 70, 0.8);
+        border-color: rgba(255, 255, 255, 0.6);
+        color: #ffffff;
+      }
+
+      .ghost-pill {
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        background: #ffd66e;
+        box-shadow: 0 0 14px rgba(255, 214, 110, 0.9);
+      }
+
+      .status-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 12px;
+        color: #98a4d8;
+        margin-top: 8px;
+      }
+
+      /* LOADING ROW (hidden until Start in XR is clicked) */
+      .loading-row {
+        margin-top: 14px;
+        display: none; /* will be set to flex in JS */
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .loading-circle {
+        width: 32px;
+        height: 32px;
+        border-radius: 999px;
+        border: 3px solid rgba(0, 255, 183, 0.1);
+        border-top-color: #00ffb7;
+        border-right-color: #00b4ff;
+        animation: loadingSpin 0.9s linear infinite;
+        box-shadow:
+          0 0 12px rgba(0, 255, 183, 0.6),
+          0 0 18px rgba(0, 180, 255, 0.6);
+        flex-shrink: 0;
+      }
+
+      @keyframes loadingSpin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .loading-strip-and-text {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .loading-strip {
+        position: relative;
+        width: 100%;
+        height: 7px;
+        border-radius: 999px;
+        background: rgba(9, 15, 45, 0.95);
+        overflow: hidden;
+        box-shadow: 0 0 0 1px rgba(125, 145, 255, 0.18);
+      }
+
+      .loading-strip-inner {
+        position: absolute;
+        inset: 0;
+        transform-origin: left center;
+        background: linear-gradient(90deg, #00ffb7, #00b4ff);
+        box-shadow:
+          0 0 14px rgba(0, 255, 183, 0.9),
+          0 0 28px rgba(0, 180, 255, 0.7);
+        transform: scaleX(0.05);
+        transition: transform 0.25s ease-out;
+      }
+
+      .loading-text-row {
+        display: flex;
+        justify-content: space-between;
+        font-size: 11px;
+        color: #a8b4f0;
+      }
+
+      .loading-percent {
+        font-variant-numeric: tabular-nums;
+        color: #e5f3ff;
+      }
+
+      #ai-loading-message {
+        font-size: 11px;
+        color: #d1ddff;
+        opacity: 0.95;
+      }
+
+      .splash-footer {
+        position: relative;
+        margin-top: 16px;
+        padding-top: 10px;
+        border-top: 1px solid rgba(141, 169, 255, 0.28);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        z-index: 1;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 11px;
+        color: #8fa0ff;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+      }
+
+      .brand-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, #00ffb7, #00b4ff);
+        box-shadow: 0 0 12px rgba(0, 255, 183, 0.9);
+      }
+
+      .brand strong {
+        color: #ffffff;
+        font-weight: 600;
+      }
+
+      .tip {
+        font-size: 11px;
+        color: #909ed8;
+      }
+
+      /* SCENE CONTAINER */
+      #scene-container {
+        width: 100%;
+        height: 100%;
+        background: #000;
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 840px) {
+        .splash-inner {
+          max-height: none;
+          padding: 20px 18px 18px;
+        }
+        .splash-main {
+          flex-direction: column;
+        }
+        .splash-left {
+          align-items: center;
+        }
+        .tagline {
+          text-align: center;
+        }
+        .logo-main {
+          justify-content: center;
+        }
+        .splash-right {
+          margin-top: 10px;
+        }
+        .status-row {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 4px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app-root">
+      <!-- Splash / Landing UI -->
+      <div id="splash-screen">
+        <div class="splash-inner">
+          <div class="orb orb-top-left"></div>
+          <div class="orb orb-bottom-right"></div>
+
+          <div class="splash-main">
+            <!-- LEFT: BIG LOGO -->
+            <div class="splash-left">
+              <div class="logo-wrap">
+                <div class="logo-pill">
+                  <div class="logo-pill-dot"></div>
+                  <span>XR Shopping Simulator</span>
+                </div>
+
+                <div class="logo-main">
+                  <div class="logo-glow-ring"></div>
+                  <img
+                    src="/textures/webxr.png"
+                    alt="XR Shopping Simulator"
+                    class="logo-image"
+                  />
+                </div>
+
+                <p class="tagline">
+                  Scan items, beat the clock, and become the fastest VR cashier in the
+                  store.
+                </p>
+              </div>
+            </div>
+
+            <!-- RIGHT: COPY / BUTTONS / LOADING -->
+            <div class="splash-right">
+              <h1 class="headline">
+                Step up to the
+                <span>immersive checkout counter.</span>
+              </h1>
+              <p class="subhead">
+                Grab items off the desk, hover them above the glowing pad, and race
+                the timer to complete as many "orders" as you can.
+              </p>
+
+              <div class="bullet-list">
+                <div class="bullet-item">
+                  <div class="bullet-dot"></div>
+                  <div>Hand-tracked scanning pad and glowing feedback.</div>
+                </div>
+                <div class="bullet-item">
+                  <div class="bullet-dot"></div>
+                  <div>Real-time score counter and dynamic game timer.</div>
+                </div>
+                <div class="bullet-item">
+                  <div class="bullet-dot"></div>
+                  <div>Designed for Meta Quest — stand at the virtual checkout lane.</div>
+                </div>
+              </div>
+
+              <div class="splash-actions">
+                <button id="enter-xr-button" class="primary-btn">
+                  <span class="primary-btn-icon"></span>
+                  <span>Start in XR</span>
+                </button>
+
+                <button id="enter-flat-button" class="ghost-btn">
+                  <div class="ghost-pill"></div>
+                  <span>Preview in browser</span>
+                </button>
+              </div>
+
+              <!-- AI-style loading (shown only after Start in XR is clicked) -->
+              <div class="loading-row" id="loading-row">
+                <div class="loading-circle"></div>
+                <div class="loading-strip-and-text">
+                  <div class="loading-strip">
+                    <div
+                      class="loading-strip-inner"
+                      id="loading-strip-inner"
+                    ></div>
+                  </div>
+                  <div class="loading-text-row">
+                    <span id="loading-status-label">Preparing XR lane…</span>
+                    <span id="loading-percent" class="loading-percent">0%</span>
+                  </div>
+                  <div id="ai-loading-message">
+                    Warming up the virtual receipt printer…
+                  </div>
+                </div>
+              </div>
+
+              <div class="status-row">
+                <span>Best experienced on Meta Quest.</span>
+                <span>Level 1 · 90s checkout sprint</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- FOOTER -->
+          <div class="splash-footer">
+            <div class="brand">
+              <div class="brand-dot"></div>
+              <span>Built by <strong>Retailbridge</strong></span>
+            </div>
+            <div class="tip">
+              Tip: Enable hand tracking on your headset for the full experience.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Actual 3D / XR scene -->
+      <div id="scene-container"></div>
+    </div>
+
+    <!-- Simple background music reused from your audio folder -->
+
+    <script>
+      (function () {
+        const splash = document.getElementById("splash-screen");
+        const enterXRButton = document.getElementById("enter-xr-button");
+        const enterFlatButton = document.getElementById("enter-flat-button");
+        const loadingRow = document.getElementById("loading-row");
+        const loadingStripInner = document.getElementById("loading-strip-inner");
+        const loadingPercent = document.getElementById("loading-percent");
+        const loadingStatusLabel = document.getElementById("loading-status-label");
+        const aiLoadingMessage = document.getElementById("ai-loading-message");
+
+        let xrRequested = false;
+        let flatRequested = false;
+        let progressValue = 0;
+        let aiSequenceRunning = false;
+
+        const aiMessages = [
+          "Consulting the store AI about acceptable beep volume…",
+          "Teaching the scanner the difference between a plant and a pizza…",
+          "Balancing your imaginary cash drawer to 0.000 credits…",
+          "Arguing with physics about dropping items ‘just to test’…",
+          "Optimizing the satisfaction curve of the beep sound…",
+          "Running background check on your virtual loyalty points…",
+          "Convincing the robot not to upsell 42 warranty plans…",
+          "Polishing the glow on the scanner pad to elite standards…",
+        ];
+
+        function fadeOutSplash() {
+          if (!splash) return;
+          splash.classList.add("hidden");
+          setTimeout(() => {
+            splash.style.display = "none";
+          }, 700);
+        }
+
+        function updateLoadingProgress(pct, label) {
+          progressValue = Math.max(0, Math.min(100, pct));
+          if (loadingStripInner) {
+            loadingStripInner.style.transform =
+              "scaleX(" + Math.max(progressValue / 100, 0.04) + ")";
+          }
+          if (loadingPercent) {
+            loadingPercent.textContent = Math.round(progressValue) + "%";
+          }
+          if (label && loadingStatusLabel) {
+            loadingStatusLabel.textContent = label;
+          }
+        }
+
+        // Optional: can be used later from TS if you want real progress.
+        window.setLoadingProgress = function (pct, label) {
+          updateLoadingProgress(pct, label || "Loading XR assets…");
+        };
+
+        window.onIWSdkWorldReady = function () {
+          // If you later wire this from index.ts, it will bump to 100%.
+          updateLoadingProgress(100, "Systems online");
+        };
+
+        function startAILoadSequence() {
+          if (aiSequenceRunning) return;
+          aiSequenceRunning = true;
+
+          if (loadingRow) {
+            loadingRow.style.display = "flex";
+          }
+
+          updateLoadingProgress(5, "Preparing XR checkout lane…");
+          if (aiLoadingMessage) {
+            aiLoadingMessage.textContent =
+              "Warming up the virtual receipt printer…";
+          }
+
+          let msgIndex = 0;
+          let localProgress = 5;
+
+          const msgInterval = setInterval(() => {
+            msgIndex = (msgIndex + 1) % aiMessages.length;
+            if (aiLoadingMessage) {
+              aiLoadingMessage.textContent = aiMessages[msgIndex];
+            }
+            localProgress = Math.min(localProgress + 7, 92);
+            updateLoadingProgress(localProgress);
+          }, 900);
+
+          // After ~4.5s, finish and enter XR
+          setTimeout(() => {
+            clearInterval(msgInterval);
+            updateLoadingProgress(100, "All systems ready");
+            if (aiLoadingMessage) {
+              aiLoadingMessage.textContent = "Opening your XR lane…";
+            }
+            setTimeout(() => {
+              fadeOutSplash();
+              if (window.__enterXRSession) {
+                window.__enterXRSession();
+              }
+            }, 700);
+          }, 4500);
+        }
+
+        enterXRButton?.addEventListener("click", () => {
+          xrRequested = true;
+          flatRequested = false;
+          startAILoadSequence();
+        });
+
+        enterFlatButton?.addEventListener("click", () => {
+          flatRequested = true;
+          xrRequested = false;
+          fadeOutSplash();
+          // No special behavior needed for flat; world is already running in 2D.
+        });
+
+        // Optional keyboard shortcut for dev.
+        window.__enterXRFromKeyboard = function () {
+          if (xrRequested) return;
+          xrRequested = true;
+          startAILoadSequence();
+        };
+      })();
+    </script>
+  </body>
+</html>

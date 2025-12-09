@@ -1,0 +1,74 @@
+<style>
+  .panel-container {
+    align-items: flex-start;
+    padding: 2.4;
+    width: 60;
+    display: flex;
+    flex-direction: column;
+
+    /* META BLUE PANEL */
+    background-color: rgba(24, 119, 242, 0.90); /* META BLUE */
+    border-color: #1A8CFF; /* Secondary Meta Blue */
+    border-width: 0.20;
+    border-radius: 3.6;
+
+    gap: 2.6;
+  }
+
+  .heading {
+    font-size: 4.8;
+    font-weight: 700;
+    color: #ffffff;
+    text-align: left;
+  }
+
+  .sub-heading {
+    font-size: 2.4;
+    color: #EAF4FF;
+    text-align: left;
+    margin-top: 0.4;
+    line-height: 1.5;
+  }
+
+  .instructions-title {
+    font-size: 2.5;
+    font-weight: 600;
+    color: #FFFFFF;
+    margin-top: 1.4;
+  }
+
+  .instructions-text {
+    font-size: 2.2;
+    color: #F0F8FF;
+    line-height: 1.6;
+  }
+
+  #xr-button {
+    width: 100%;
+    padding: 2;
+
+    /* META BLUE BUTTON */
+    background-color: #1A8CFF;
+    color: #ffffff;
+
+    border-radius: 1.6;
+    border-width: 0.1;
+    border-color: #3B9CFF;
+
+    font-size: 2.7;
+    font-weight: 650;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 1.8;
+  }
+</style>
+
+<div class="panel-container">
+  <span class="heading">XR Shopping Simulator</span>
+
+  <span class="sub-heading">
+    Grab an item with your contoller or hand and move it over the green pad to scan it. Level 1 - Beat the shopping clock, and score more than $150 to win!
+  </span>
+
+  <button id="xr-button">Start in XR</button>
+</div>

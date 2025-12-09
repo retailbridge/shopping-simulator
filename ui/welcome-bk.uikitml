@@ -1,0 +1,73 @@
+<style>
+  .panel-container {
+    align-items: flex-start;
+    padding: 2;
+    width: 60;
+    display: flex;
+    flex-direction: column;
+    background-color: #0d0d10;
+    border-color: #2e2e33;
+    border-width: 0.18;
+    border-radius: 3;
+    gap: 2;
+  }
+
+  .heading {
+    font-size: 4.5;
+    font-weight: 600;
+    color: #ffffff;
+    text-align: left;
+  }
+
+  .sub-heading {
+    font-size: 2.2;
+    color: #c7c7d1;
+    text-align: left;
+    margin-top: 0.3;
+    line-height: 1.4;
+  }
+
+  .menu-button {
+    width: 100%;
+    padding: 1.8;
+    background-color: #1a1a1e;
+    color: #fafafa;
+    border-radius: 1.5;
+    border-width: 0.15;
+    border-color: #3a3a40;
+    font-size: 2.3;
+    font-weight: 500;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  #xr-button {
+    width: 100%;
+    padding: 1.8;
+    background-color: #fafafa;
+    color: #09090b;
+    border-radius: 1.5;
+    border-width: 0.1;
+    border-color: #e4e4e7;
+    font-size: 2.5;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 1;
+  }
+</style>
+
+<div class="panel-container">
+  <span class="heading">Welcome to Shopping Simulator</span>
+
+  <span class="sub-heading">
+    aaGrab an item, scan it, and watch the magic happen. Your mission: explore,
+    scan, organize, and enjoy your own mixed-reality mini-market. Hands ready—
+    let’s begin!
+  </span>
+
+  <button class="menu-button" id="version-button">Version</button>
+  <button class="menu-button" id="about-button">About</button>
+
+  <button id="xr-button">Enter XR</button>
+</div>

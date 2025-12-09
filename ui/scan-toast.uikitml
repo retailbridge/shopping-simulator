@@ -1,0 +1,24 @@
+<!-- ui/scan-toast.uikitml -->
+<container
+  id="scanToast"
+  style="
+    width: 260;
+    height: 48;
+    padding: 10;
+    borderRadius: 999;
+    backgroundColor: rgba(0, 140, 0, 0.92);
+    alignItems: center;
+    justifyContent: center;
+  "
+>
+  <text
+    id="scanToastText"
+    style="
+      fontSize: 20;
+      color: #ffffff;
+      fontWeight: 600;
+    "
+  >
+    Scanned - Good job!
+  </text>
+</container>

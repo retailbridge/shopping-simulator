@@ -1,0 +1,45 @@
+<!-- ui/product.uikitml -->
+<container
+  id="productPanel"
+  style="
+    width: 420;
+    height: 260;
+    backgroundcolor: rgba(15,15,20,0.9);
+    padding: 16;
+    gap: 8;
+    borderradius: 18;
+  "
+>
+  <text
+    id="productTitle"
+    style="
+      fontSize: 28;
+      color: #ffffff;
+      fontWeight: 600;
+    "
+  >
+    Sansevieria Plant
+  </text>
+
+  <text
+    id="productPrice"
+    style="
+      fontSize: 22;
+      color: #00ffcc;
+      fontWeight: 600;
+    "
+  >
+    $14.99
+  </text>
+
+  <text
+    id="productDescription"
+    style="
+      fontSize: 18;
+      color: #dddddd;
+      lineHeight: 1.4;
+    "
+  >
+    A low-maintenance plant that thrives indoors and looks great on any desk.
+  </text>
+</container>

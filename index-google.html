@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>XR Shopping Simulator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #000;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+      }
+
+      /* Main scene container used by IWS / Three.js */
+      #scene-container {
+        width: 100%;
+        height: 100%;
+      }
+
+      /* Fullscreen loading overlay */
+      #loading-overlay {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: radial-gradient(circle at top, #111 0, #000 55%, #000 100%);
+        z-index: 9999;
+        color: #fff;
+        pointer-events: none;
+      }
+
+      #loading-logo {
+        width: min(70vw, 520px);
+        max-width: 520px;
+        margin-bottom: 28px;
+        object-fit: contain;
+      }
+
+      #loading-title {
+        font-size: 1.55rem;
+        font-weight: 650;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 18px;
+        text-align: center;
+        opacity: 0.97;
+      }
+
+      #loading-subtitle {
+        font-size: 0.98rem;
+        opacity: 0.86;
+        margin-bottom: 26px;
+        text-align: center;
+        padding: 0 20px;
+        max-width: 640px;
+      }
+
+      /* Loading bar + message container */
+      #loading-bar-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 14px;
+        margin-top: 6px;
+      }
+
+      /* Smaller screens or typical headset mirroring → stack vertically */
+      @media (max-width: 700px) {
+        #loading-bar-container {
+          flex-direction: column;
+          gap: 8px;
+        }
+      }
+
+      #loading-bar {
+        width: min(70vw, 480px);
+        height: 8px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.08);
+        overflow: hidden;
+        position: relative;
+      }
+
+      #loading-bar-fill {
+        position: absolute;
+        inset: 0;
+        width: 0%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, #34d399, #22c55e, #4ade80);
+        transform-origin: left center;
+        animation: loading-pulse 1.4s ease-in-out infinite;
+      }
+
+      #loading-bar-message {
+        font-size: 0.9rem;
+        opacity: 0.75;
+        white-space: nowrap;
+        animation: fade-in 0.9s ease-out forwards;
+      }
+
+      #loading-hint {
+        margin-top: 16px;
+        font-size: 0.8rem;
+        opacity: 0.7;
+        text-align: center;
+        max-width: 520px;
+        padding: 0 20px;
+      }
+
+      @keyframes loading-pulse {
+        0% {
+          transform: scaleX(0.1);
+        }
+        50% {
+          transform: scaleX(0.85);
+        }
+        100% {
+          transform: scaleX(0.4);
+        }
+      }
+
+      @keyframes fade-in {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 0.75;
+        }
+      }
+
+      /* Fade-out animation when ready */
+      .loading-hidden {
+        opacity: 0;
+        transition: opacity 0.5s ease-out;
+        pointer-events: none;
+      }
+
+      /* Desktop / non-VR description card overlay (optional) */
+      #page-info {
+        position: fixed;
+        left: 16px;
+        bottom: 16px;
+        max-width: 420px;
+        padding: 14px 16px;
+        border-radius: 10px;
+        background: rgba(10, 10, 10, 0.88);
+        color: #f9fafb;
+        z-index: 20;
+        box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        pointer-events: auto;
+      }
+
+      #page-info h1 {
+        font-size: 1.05rem;
+        margin: 0 0 6px 0;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: #bbf7d0;
+      }
+
+      #page-info p {
+        margin: 0 0 8px 0;
+        font-size: 0.88rem;
+        line-height: 1.4;
+        color: #e5e7eb;
+      }
+
+      #page-info strong {
+        font-weight: 600;
+      }
+
+      #page-info small {
+        font-size: 0.78rem;
+        opacity: 0.85;
+      }
+
+      @media (max-width: 640px) {
+        #page-info {
+          max-width: calc(100% - 32px);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Fullscreen loading screen (visible immediately) -->
+    <div id="loading-overlay">
+      <!-- Using the same texture as the in-world banner for now -->
+      <img
+        id="loading-logo"
+        src="./textures/webxr.png"
+        alt="XR Shopping Simulator Logo"
+      />
+      <div id="loading-title">XR Shopping Simulator</div>
+      <div id="loading-subtitle">
+        Step behind the checkout counter in a mini-game inspired by
+        <strong>Job Simulator</strong>. Grab 3D products with your hands,
+        scan them on the glowing pad, and see how many items you can process
+        before the timer runs out.
+      </div>
+
+      <div id="loading-bar-container">
+        <div id="loading-bar">
+          <div id="loading-bar-fill"></div>
+        </div>
+
+        <div id="loading-bar-message">
+          Preparing your scene… please wait
+        </div>
+      </div>
+
+      <div id="loading-hint">
+        For best results, use a WebXR-enabled browser (like Chromium-based
+        browsers with WebXR support). When you&apos;re ready, click
+        <strong>&quot;Enter VR&quot;</strong> or <strong>&quot;Start VR&quot;</strong> in
+        your browser to jump into the headset.
+      </div>
+    </div>
+
+    <!-- Small on-page description card (desktop / non-VR) -->
+    <div id="page-info">
+      <h1>XR Shopping Simulator</h1>
+      <p>
+        A fast, light-hearted VR mini-game where you stand at a checkout
+        counter, grab items, and scan them as quickly as you can before the
+        clock hits zero.
+      </p>
+      <p>
+        Inspired by the spirit of <strong>Job Simulator</strong>, this demo
+        focuses on hand-tracked grabbing, clean spatial UI, and a simple,
+        replayable loop you can use for testing, showcasing, or just having a
+        bit of fun.
+      </p>
+      <small>
+        Tip: Once the page has loaded, press
+        <strong>&quot;Enter VR&quot;</strong> or
+        <strong>&quot;Start VR&quot;</strong> from your browser to experience
+        the game in your headset.
+      </small>
+    </div>
+
+    <!-- IWS / Three.js scene -->
+    <div id="scene-container"></div>
+
+    <!-- Hook script: adjust src to whatever your bundler outputs if needed -->
+    <script type="module" src="/src/index.ts"></script>
+
+    <script>
+      // When the world is created in index.ts, it dispatches "world-ready".
+      // We listen here and fade out the loading overlay, so by the time
+      // you enter VR the scene is already set up.
+      window.addEventListener("world-ready", () => {
+        const overlay = document.getElementById("loading-overlay");
+        if (!overlay) return;
+
+        overlay.classList.add("loading-hidden");
+
+        // Remove from DOM after fade-out completes
+        setTimeout(() => {
+          if (overlay && overlay.parentNode) {
+            overlay.parentNode.removeChild(overlay);
+          }
+        }, 600);
+      });
+    </script>
+  </body>
+</html>
